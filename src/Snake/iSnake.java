@@ -38,19 +38,19 @@ public class iSnake {
 			while(!SnakeGame.isGameOver()) {
 				try {
 					input = br.readLine();
-					if(input.equalsIgnoreCase("W")) {
+					char lastInput = input.charAt(input.length() - 1);
+					if(lastInput == 'w') {
 						SnakeGame.moveSnakeUp();
-					} else if (input.equalsIgnoreCase("A")) {
+					} else if (lastInput == 'a') {
 						SnakeGame.moveSnakeLeft();
-					} else if (input.equalsIgnoreCase("S")) {
+					} else if (lastInput == 's') {
 						SnakeGame.moveSnakeDown();
-					} else if (input.equalsIgnoreCase("D")) {
+					} else if (lastInput == 'd') {
 						SnakeGame.moveSnakeRight();
 					} else {
 						throw new IllegalArgumentException("Not a valid movement command: try (W,A,S,D)");
 					}
 					SnakeGame.Print();
-					System.out.println(SnakeGame.isGameOver());
 				} catch (IllegalArgumentException ex) {
 					System.out.println(ex.getMessage());
 				}
