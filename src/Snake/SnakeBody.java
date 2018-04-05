@@ -19,26 +19,11 @@ public class SnakeBody {
 		length = 1;
 	}
 	
-	public void moveUp() {
-		String oldHead[] = SnakeBody[head].split(":");
-		String newHead = Integer.toString(Integer.parseInt(oldHead[0]) + 1) + ":" + oldHead[1];
-		
-		if(SelfCollision()) {
-			Killed();
-		}
-
-		head++;
-		if(head == length) {
-			head = 0;
-		}
-		SnakeBody[head] = newHead;
-	}
-	
-	public void moveDown() {
+	public String moveUp() {
 		String oldHead[] = SnakeBody[head].split(":");
 		String newHead = Integer.toString(Integer.parseInt(oldHead[0]) - 1) + ":" + oldHead[1];
 		
-		if(SelfCollision()) {
+		if(SelfCollision(newHead)) {
 			Killed();
 		}
 
@@ -47,13 +32,30 @@ public class SnakeBody {
 			head = 0;
 		}
 		SnakeBody[head] = newHead;
+		return newHead;
 	}
 	
-	public void moveLeft() {
+	public String moveDown() {
+		String oldHead[] = SnakeBody[head].split(":");
+		String newHead = Integer.toString(Integer.parseInt(oldHead[0]) + 1) + ":" + oldHead[1];
+		
+		if(SelfCollision(newHead)) {
+			Killed();
+		}
+
+		head++;
+		if(head == length) {
+			head = 0;
+		}
+		SnakeBody[head] = newHead;
+		return newHead;
+	}
+	
+	public String moveLeft() {
 		String oldHead[] = SnakeBody[head].split(":");
 		String newHead = oldHead[0] + ":" + Integer.toString(Integer.parseInt(oldHead[1]) - 1); 
 
-		if(SelfCollision()) {
+		if(SelfCollision(newHead)) {
 			Killed();
 		}
 
@@ -62,13 +64,14 @@ public class SnakeBody {
 			head = 0;
 		}
 		SnakeBody[head] = newHead;
+		return newHead;
 	}
 	
-	public void moveRight() {
+	public String moveRight() {
 		String oldHead[] = SnakeBody[head].split(":");
 		String newHead = oldHead[0] + ":" + Integer.toString(Integer.parseInt(oldHead[1]) + 1); 
 
-		if(SelfCollision()) {
+		if(SelfCollision(newHead)) {
 			Killed();
 		}
 
@@ -77,6 +80,7 @@ public class SnakeBody {
 			head = 0;
 		}
 		SnakeBody[head] = newHead;
+		return newHead;
 	}
 	
 	public void grow() {
@@ -96,8 +100,8 @@ public class SnakeBody {
 		length++;
 	}
 	
-	private Boolean SelfCollision() {
-		if(Arrays.asList(SnakeBody).contains(head)) {
+	private Boolean SelfCollision(String newHead) {
+		if(Arrays.asList(SnakeBody).contains(newHead)) {
 			return true;
 		}
 		return false;

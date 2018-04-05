@@ -5,11 +5,13 @@ import java.io.InputStreamReader;
 
 public class iSnake {
 	public static void main(String[] args) {
+		SnakeArena SnakeGame;
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println("Enter the dimensions of the snake arena");
 			int height = 0;
 			int width = 0;
+			String input = "";
 			
 			Boolean invalid = true;
 			while(invalid) {
@@ -31,11 +33,27 @@ public class iSnake {
 				}
 				invalid = false;
 			}
-			SnakeArena snakeArena = new SnakeArena(height, width);
-			snakeArena.Print();
-			
-			while(true) {
-				
+			SnakeGame = new SnakeArena(height, width);
+			SnakeGame.Print();
+			while(!SnakeGame.isGameOver()) {
+				try {
+					input = br.readLine();
+					if(input.equalsIgnoreCase("W")) {
+						SnakeGame.moveSnakeUp();
+					} else if (input.equalsIgnoreCase("A")) {
+						SnakeGame.moveSnakeLeft();
+					} else if (input.equalsIgnoreCase("S")) {
+						SnakeGame.moveSnakeDown();
+					} else if (input.equalsIgnoreCase("D")) {
+						SnakeGame.moveSnakeRight();
+					} else {
+						throw new IllegalArgumentException("Not a valid movement command: try (W,A,S,D)");
+					}
+					SnakeGame.Print();
+					System.out.println(SnakeGame.isGameOver());
+				} catch (IllegalArgumentException ex) {
+					System.out.println(ex.getMessage());
+				}
 			}
 			
 		} catch (IOException ex) {
