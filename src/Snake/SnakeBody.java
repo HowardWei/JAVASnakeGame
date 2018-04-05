@@ -23,14 +23,17 @@ public class SnakeBody {
 		String oldHead[] = SnakeBody[head].split(":");
 		String newHead = Integer.toString(Integer.parseInt(oldHead[0]) - 1) + ":" + oldHead[1];
 		
-		if(SelfCollision(newHead)) {
-			Killed();
-		}
-
 		head++;
 		if(head == length) {
 			head = 0;
 		}
+
+		SnakeBody[head] = "";
+		
+		if(SelfCollision(newHead)) {
+			Killed();
+		}
+
 		SnakeBody[head] = newHead;
 		return newHead;
 	}
@@ -38,15 +41,18 @@ public class SnakeBody {
 	public String moveDown() {
 		String oldHead[] = SnakeBody[head].split(":");
 		String newHead = Integer.toString(Integer.parseInt(oldHead[0]) + 1) + ":" + oldHead[1];
-		
-		if(SelfCollision(newHead)) {
-			Killed();
-		}
 
 		head++;
 		if(head == length) {
 			head = 0;
 		}
+
+		SnakeBody[head] = "";
+		
+		if(SelfCollision(newHead)) {
+			Killed();
+		}
+		
 		SnakeBody[head] = newHead;
 		return newHead;
 	}
@@ -55,14 +61,17 @@ public class SnakeBody {
 		String oldHead[] = SnakeBody[head].split(":");
 		String newHead = oldHead[0] + ":" + Integer.toString(Integer.parseInt(oldHead[1]) - 1); 
 
-		if(SelfCollision(newHead)) {
-			Killed();
-		}
-
 		head++;
 		if(head == length) {
 			head = 0;
 		}
+
+		SnakeBody[head] = "";
+		
+		if(SelfCollision(newHead)) {
+			Killed();
+		}
+		
 		SnakeBody[head] = newHead;
 		return newHead;
 	}
@@ -71,14 +80,17 @@ public class SnakeBody {
 		String oldHead[] = SnakeBody[head].split(":");
 		String newHead = oldHead[0] + ":" + Integer.toString(Integer.parseInt(oldHead[1]) + 1); 
 
-		if(SelfCollision(newHead)) {
-			Killed();
-		}
-
 		head++;
 		if(head == length) {
 			head = 0;
 		}
+
+		SnakeBody[head] = "";
+		
+		if(SelfCollision(newHead)) {
+			Killed();
+		}
+		
 		SnakeBody[head] = newHead;
 		return newHead;
 	}

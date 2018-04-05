@@ -42,7 +42,6 @@ public class SnakeArena {
 	public void moveSnakeUp() {
 		String newHead = SnakeBody.moveUp();
 		if(SnakeBody.isDead() || wallCollision()) {
-			System.out.println("GAME OVER - TOTAL SCORE: " + Integer.toString(totalScore));
 			gameOver = true;
 		} else if (Apple.equals(newHead)) {
 			totalScore += 10;
@@ -56,7 +55,6 @@ public class SnakeArena {
 	public void moveSnakeDown() {
 		String newHead = SnakeBody.moveDown();
 		if(SnakeBody.isDead() || wallCollision()) {
-			System.out.println("GAME OVER - TOTAL SCORE: " + Integer.toString(totalScore));
 			gameOver = true;
 		} else if (Apple.equals(newHead)) {
 			totalScore += 10;
@@ -70,7 +68,6 @@ public class SnakeArena {
 	public void moveSnakeLeft() {
 		String newHead = SnakeBody.moveLeft();
 		if(SnakeBody.isDead() || wallCollision()) {
-			System.out.println("GAME OVER - TOTAL SCORE: " + Integer.toString(totalScore));
 			gameOver = true;
 		} else if (Apple.equals(newHead)) {
 			totalScore += 10;
@@ -84,7 +81,6 @@ public class SnakeArena {
 	public void moveSnakeRight() {
 		String newHead = SnakeBody.moveRight();
 		if(SnakeBody.isDead() || wallCollision()) {
-			System.out.println("GAME OVER - TOTAL SCORE: " + Integer.toString(totalScore));
 			gameOver = true;
 		} else if (Apple.equals(newHead)) {
 			totalScore += 10;
@@ -96,11 +92,13 @@ public class SnakeArena {
 	}
 	
 	public Boolean wallCollision() {
-		System.out.println(SnakeBody.getSnakeHead());
 		if(SnakeBody.getSnakeHead().contains("-")) {
 			return true;
 		} else {
-			
+			String[] snakeHead = SnakeBody.getSnakeHead().split(":");
+			if(Integer.parseInt(snakeHead[0]) >= height || Integer.parseInt(snakeHead[1]) >= width) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -125,6 +123,11 @@ public class SnakeArena {
 				}
 			}
 			System.out.println(row);
+		}
+		if(!gameOver) {
+			System.out.println("SCORE: " + Integer.toString(totalScore));
+		} else {
+			System.out.println("GAME OVER - TOTAL SCORE: " + Integer.toString(totalScore));
 		}
 	}
 }
